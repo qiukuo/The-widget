@@ -1,0 +1,161 @@
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+    <meta charset="UTF-8">
+    <title>三角箭头</title>
+    <style type="text/css">
+    body{
+        margin-bottom: 100px;
+    }
+
+    p.one 
+    {
+        width: 0;
+        height: 0;
+        border-top: 50px  solid red;
+        border-left: 50px solid blue;
+        border-right: 50px solid blue ;
+        border-bottom: 50px solid red;
+    }  
+
+    .arrow_top{
+    position: relative;
+    width: 0px;
+    height: 0px;
+    border:10px solid transparent;
+    border-bottom: 10px solid #222;
+    left:70px;
+    top: 20px;
+    }
+.arrow_top:after{
+    content:"";
+    display:block;
+    width:0px;
+    height:0px;
+    border:10px solid transparent;
+    border-bottom: 10px solid #888;
+    position: relative;
+    top:-0px;
+    left: -0px;
+    }   
+
+    .arrow_yes{
+    position: relative;
+    width: 0px;
+    height: 0px;
+    border:10px solid transparent;
+    border-bottom: 10px solid #222;
+    left:70px;
+    top: 20px;
+    }
+.arrow_yes:after{
+    content:"";
+    display:block;
+    width:0px;
+    height:0px;
+    border:10px solid transparent;
+    border-bottom: 10px solid #fff;
+    position: relative;
+    top:-9px;
+    left: -10px;
+    }   
+    </style>
+</head>
+    <body>
+        <div>
+        <textarea style="width:500px; height:300px;">
+        前几天写学校的一个首页，用到了这个三角箭头。
+       
+            首先我们来看一下，实现的原理。
+       
+            我们使用的是border 来模拟出三角形。 
+       
+       p.one 
+       {
+           width: 0;
+           height: 0;
+           border-top: 50px  solid red;
+           border-left: 50px solid blue;
+           border-right: 50px solid blue ;
+           border-bottom: 50px solid red;
+       }                                           </textarea>
+       <p class="one"></p>                                            
+       </div>
+
+       <textarea style="width:700px; height:700px;">
+      可以看出当没有内容时，我们可以通过改变边框的大小和      颜色来模拟出我们想要的形状。
+      
+      我们可以分别的模拟出各种不同的形状。  
+      
+      
+      
+      
+       这样我们就可以得到任何我们想要的的三角形。 
+      
+      
+      然后我们还可以通过调整内容的长宽来模拟出梯形或其他      的图。
+      
+      
+      
+      然后我们就可以来看一下，怎么去实现三角箭头。
+      
+      三角箭头需要使用的是：after        。当然你也可以再使用一个p 标签来模拟出相同的效果。
+      
+      但是还是推荐使用 ：after 
+      
+.arrow_top{
+    position: relative;
+    width: 0px;
+    height: 0px;
+    border:10px solid transparent;
+    border-bottom: 10px solid #222;
+    left:70px;
+    top: 20px;
+    }
+.arrow_top:after{
+    content:"";
+    display:block;
+    width:0px;
+    height:0px;
+    border:10px solid transparent;
+    border-bottom: 10px solid #888；
+    position: relative;
+    top:-0px;
+    left: -0px;
+    }                                             </textarea>
+    <p class="arrow_top"></p>
+    <br>
+    <textarea style="width:500px; height:400px;">              
+   这时你会得到两个相同的三角形。    
+   
+   
+   这时我们通过调整after    的位置和颜色来模拟出箭头的样子。
+   
+   调整top  和  left  以及下方三角的颜色我们就可以得到三角的箭头。
+
+   .arrow_yes{
+    position: relative;
+    width: 0px;
+    height: 0px;
+    border:10px solid transparent;
+    border-bottom: 10px solid #222;
+    left:70px;
+    top: 20px;
+    }
+.arrow_yes:after{
+    content:"";
+    display:block;
+    width:0px;
+    height:0px;
+    border:10px solid transparent;
+    border-bottom: 10px solid #fff;
+    position: relative;
+    top:-9px;
+    left: -10px;
+    }   
+   </textarea>  
+   <p class="arrow_yes"></yes>
+</body>
+</html>
+
+
