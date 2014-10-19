@@ -1,0 +1,248 @@
+<!-- 
+    content:    浮动的一个dome 以及自己的一些看法
+    author：litkk
+    time: 2014.10.19
+ -->
+
+<!DOCTYPE html>
+<HTML lang="en">
+<head>
+
+	<meta charset="utf-8">
+	<title>float</title>
+	<style>
+	*{
+		margin: 0px;
+		padding: 0px;
+	}
+	body{
+		padding:50px;
+		width: 100%;
+		height: 100%
+	}
+	#span{
+		height: 50px;
+	}
+	#span span{
+		background-color: #8EDD75;
+		border:1px solid #111;
+		margin: 20px;
+	}
+	.span_c{
+		display: inline-block;
+	}
+	.left{
+		display:inline-block;
+		width: 700px;
+	}
+	.right{
+		height: 450px;
+		display: inline-block;
+		width: 300px;
+	}
+	#div{
+		clear: both;
+		height: 350px;
+		margin-top: 50px;
+		border: 1px solid #111;
+		width: 700px;
+	}
+	#div:after{
+		clear: both;
+	}
+	#div div{
+		height: 30px;
+		width:100px;
+		background-color: #8EDD75;
+		border: 1px solid #111;
+	}
+	.span_c{
+		height: 100px;
+	}
+	#go{
+		margin-top: 30px;
+		margin-left: 50px;
+		width:100px;
+		height: 50px;
+		cursor: pointer;
+	}
+	textarea{
+		width: 1000px;
+		height: 500px;
+	}
+	</style>
+</head>
+    <body>
+    	<div class="left">
+    	    <p>三个没有浮动的span,已经设置了高度100px 外边框20px ,通过左侧来进行测试</p><br>
+    	    <div id="span">
+                <span class="span">111111111111</span>
+                <span class="span">222222222222</span>
+                <span class="span">333333333333</span>
+            </div>
+            <div id="div">
+            	<p>共有9个div 默认为没有浮动 高度为100px  注意每个小div里 内容(名字)的表现</p>
+            	<div class="div"><p>11</p></div>
+            	<div class="div"><p>22</p></div>
+            	<div class="div"><p>33</p></div>
+            	<div class="div"><p>44</p></div>
+            	<div class="div"><p>55</p></div>
+            	<div class="div"><p>66</p></div>
+            	<div class="div"><p>77</p></div>
+            	<div class="div"><p>88</p></div>
+            	<div class="div"><p>99</p></div>
+            </div>
+        </div>
+        <div class="right">
+            <div class="span_c">
+            	<div class="span_1">
+        		    <span> 1 的高度为<input class="span_h" type="text" value="100" size="3">px</span>
+        			<span> 是否浮动 <input class="span_f" type="checkbox"></span></br>
+        	    </div>
+        	    <div class="span_2">
+        		    <span> 2 的高度为<input class="span_h" value="100" type="text" size="3">px</span>
+        			<span> 是否浮动 <input class="span_f" type="checkbox"></span></br>
+        	    </div>
+        	    <div class="span_3">
+        		    <span> 3 的高度为<input  class="span_h" value="100" type="text" size="3">px</span>
+        			<span> 是否浮动 <input  class="span_f" type="checkbox"></span></br>
+        	    </div>
+        	</div>
+
+        	  <div class="div_c">
+            	<div class="div_1">
+        		    <span> 1 的高度为<input class="div_h" type="text" value="30" size="3">px</span>
+        			<span> 是否浮动 <input class="div_f" type="checkbox"></span></br>
+        	    </div>
+        	    <div class="div_2">
+        		    <span> 2 的高度为<input class="div_h" type="text" value="30" size="3">px</span>
+        			<span> 是否浮动 <input class="div_f" type="checkbox"></span></br>
+        	    </div>
+        	    <div class="div_3">
+        		    <span> 3 的高度为<input class="div_h" type="text" value="30" size="3">px</span>
+        			<span> 是否浮动 <input class="div_f" type="checkbox"></span></br>
+        	    </div>
+        	    	<div class="div_4">
+        		    <span> 4 的高度为<input class="div_h" type="text" value="30" size="3">px</span>
+        			<span> 是否浮动 <input class="div_f" type="checkbox"></span></br>
+        	    </div>
+        	    <div class="div_5">
+        		    <span> 5 的高度为<input class="div_h" type="text" value="30" size="3">px</span>
+        			<span> 是否浮动 <input class="div_f" type="checkbox"></span></br>
+        	    </div>
+        	    <div class="div_6">
+        		    <span> 6 的高度为<input  class="div_h" type="text" value="30" size="3">px</span>
+        			<span> 是否浮动 <input class="div_f" type="checkbox"></span></br>
+        	    </div>
+        	    	<div class="div_7">
+        		    <span> 7 的高度为<input class="div_h" type="text" value="30" size="3">px</span>
+        			<span> 是否浮动 <input class="div_f" type="checkbox"></span></br>
+        	    </div>
+        	    <div class="div_8">
+        		    <span> 8 的高度为<input class="div_h" type="text" value="30" size="3">px</span>
+        			<span> 是否浮动 <input class="div_f" type="checkbox"></span></br>
+        	    </div>
+        	    <div class="div_9">
+        		    <span> 9 的高度为<input class="div_h" type="text" value="30" size="3">px</span>
+        			<span> 是否浮动 <input class="div_f" type="checkbox"></span></br>
+        	    </div>
+        	</div>
+        	<input id="go" type="button" value="测试" onclick="go()">
+    	</div>
+    	<div>
+    		<textarea>
+    我的看法（不保证正确）：
+    1.浮动的初衷是用于文本包围图像，所以现在的很多用法是基于浮动一些特性模拟
+    的效果,所以一直要取消浮动的一些副作用。so,不推荐什么地方都使用，一定要符合
+    语意。
+
+    2.元素浮动之后，将会变成一种既不是块级也不是联级的元素，而是有他自己的排列
+    方式,所以在讨论浮动元素对周围元素的影响时就不用考虑浮动元素之前是什么元素，因为
+    浮动之后的元素的表现形式是一样的。（变化不同是因为之前性质不同引起的，和浮动无关）
+                    
+    3.具体浮动后的表现形式，大家根据上面的dome自己测试,我就总结了，避免出现误导而且这里不会讲解浮动和清除浮动的具体应用 因为不是很推荐。
+
+    4.关于"清除浮动",方法有很多大家去网上随便可以找到很多我就不一一列出来了。
+    我要说的是：所谓的清除浮动其实有一部分是闭合浮动。而我们18号的会中引入了
+    一个bfc的名词（块级格式化上下文）。
+    以下为摘抄:
+
+在CSS2.1里面有一个很重要的概念，但是国内的技术博客介绍到的比较少，那就是 Block formatting contexts （块级格式化上下文），以下简称 BFC。 
+CSS3里面对这个规范做了改动，称之为：flow root，并且对触发条件进行了进一步说明。 
+那么如何触发BFC呢？ 
+float 除了none以外的值 
+overflow 除了visible 以外的值（hidden，auto，scroll ） 
+display (table-cell，table-caption，inline-block) 
+position（absolute，fixed） 
+fieldset元素 
+需要注意的是，display:table 本身并不会创建BFC，但是它会产生匿名框(anonymous boxes)，而匿名框中的display:table-cell可以创建新的BFC，换句话说，触发块级格式化上下文的是匿名框，而不是 display:table。所以通过display:table和display:table-cell创建的BFC效果是不一样的。 
+fieldset 元素在www.w3.org里目前没有任何有关这个触发行为的信息，直到HTML5标准里才出现。有些浏览器bugs（Webkit，Mozilla）提到过这个触发行为，但是没有任何官方声明。实际上，即使fieldset在大多数的浏览器上都能创建新的块级格式化上下文，开发者也不应该把这当做是理所当然的。CSS 2.1没有定义哪种属性适用于表单控件，也没有定义如何使用CSS来给它们添加样式。用户代理可能会给这些属性应用CSS属性，建议开发者们把这种支持当做实验性质的，更高版本的CSS可能会进一步规范这个。 
+BFC的特性： 
+1)块级格式化上下文会阻止外边距叠加 
+当两个相邻的块框在同一个块级格式化上下文中时，它们之间垂直方向的外边距会发生叠加。换句话说，如果这两个相邻的块框不属于同一个块级格式化上下文，那么它们的外边距就不会叠加。 
+2)块级格式化上下文不会重叠浮动元素 
+根据规定，一个块级格式化上下文的边框不能和它里面的元素的外边距重叠。这就意味着浏览器将会给块级格式化上下文创建隐式的外边距来阻止它和浮动元素的外边距叠加。由于这个原因，当给一个挨着浮动的块级格式化上下文添加负的外边距时将会不起作用（Webkit和IE6在这点上有一个问题——可以看这个测试用例）。 
+3)块级格式化上下文通常可以包含浮动 
+详见： W3C CSS2.1 - 10.6.7 'Auto' heights for block formatting context roots 
+通俗地来说：创建了 BFC的元素就是一个独立的盒子，里面的子元素不会在布局上影响外面的元素，反之亦然，同时BFC任然属于文档中的普通流。 
+至此，您或许明白了为什么 overflow:hidden或者auto可以闭合浮动了，真是因为父元素创建了新的BFC。对于张鑫旭在对《overflow与zoom”清除浮动”的一些认识 》一文中对于用包裹来解释闭合浮动的原理，我觉得是不够严谨的，而且没有依据。并且说道“Firefox等浏览器并没有haslayout的概念”，那么现代浏览器是有BFC的，从表现上来说，hasLayout 可以等同于 BFC。 
+IE6-7的显示引擎使用的是一个称为布局（layout）的内部概念，由于这个显示引擎自身存在很多的缺陷，直接导致了IE6-7的很多显示 bug。当我们说一个元素“得到 layout”，或者说一个元素“拥有 layout” 的时候，我们的意思是指它的微软专有属性 hasLayout http://msdn.microsoft.com/worksh ... rties/haslayout.asp 为此被设为了 true 。IE6-7使用布局的概念来控制元素的尺寸和定位，那些拥有布局（have layout）的元素负责本身及其子元素的尺寸设置和定位。如果一个元素的 hasLayout 为false，那么它的尺寸和位置由最近拥有布局的祖先元素控制。 
+触发hasLayout的条件： 
+position: absolute 
+float: left|right 
+display: inline-block 
+width: 除 “auto” 外的任意值 
+height: 除 “auto” 外的任意值 （例如很多人清除浮动会用到 height: 1% ） 
+zoom: 除 “normal” 外的任意值 (MSDN) http://msdn.microsoft.com/worksh ... properties/zoom.asp 
+writing-mode: tb-rl (MSDN) http://msdn.microsoft.com/worksh ... ies/writingmode.asp 
+在 IE7 中，overflow 也变成了一个 layout 触发器： 
+overflow: hidden|scroll|auto （ 这个属性在IE之前版本中没有触发 layout 的功能。 ） 
+overflow-x|-y: hidden|scroll|auto （CSS3 盒模型中的属性，尚未得到浏览器的广泛支持。他们在之前IE版本中同样没有触发 layout 的功能） 
+hasLayout更详细的解释请参见 old9翻译的 大名鼎鼎的 《On having layout》一文（英文原文：http://www.satzansatz.de/cssd/onhavinglayout.htm），由于old9博客被墙，中文版地址： 
+IE8使用了全新的显示引擎，据称不使用 hasLayout属性了，因此解决了很多深恶痛绝的bug。 
+综上所述： 
+在支持BFC的浏览器（IE8+，firefox，chrome，safari）通过创建新的BFC闭合浮动； 
+在不支持 BFC的浏览器 （IE6-7），通过触发 hasLayout 闭合浮动。
+
+关于浮动的东东大家可以多多交流 
+
+end   by:litkk  14.10.19
+
+    		</textarea>
+    	</div>
+    	<script type="text/javascript">
+    	    function go(){
+                var span_h=document.getElementsByClassName("span_h")
+                var span=document.getElementsByClassName("span");
+                var span_f=document.getElementsByClassName("span_f");
+                var div_h=document.getElementsByClassName("div_h")
+                var div=document.getElementsByClassName("div");
+                var div_f=document.getElementsByClassName("div_f");
+                for(var x=0;x<3;x++){
+                   span[x].style.height=span_h[x].value+"px";
+                   if(span_f[x].checked){
+                   	    span[x].style.float="left";
+                   	    span[x].style.backgroundColor="rgb(255, 228, 181)";
+                    }
+                    else{
+                    	span[x].style.float="none";
+                    	span[x].style.backgroundColor="#8EDD75";
+                    }
+                }
+
+                for(var x=0;x<9;x++){
+                   div[x].style.height=div_h[x].value+"px";
+                   if(div_f[x].checked){
+                   	    div[x].style.float="left";
+                   	    div[x].style.backgroundColor="rgba(175, 106, 32, 0.5)";
+                    }
+                    else{
+                    	div[x].style.float="none";
+                    	div[x].style.backgroundColor="#8EDD75";
+                    }
+                }
+    	    }
+    	</script>
+    </body>
+</html>
+
