@@ -28,6 +28,10 @@
       	height: 100px;
       	width: 20px;
       }
+      .control{
+      	width: 600px;
+      	margin: 10px auto;
+      }
 
 	</style>
 </head>
@@ -56,39 +60,78 @@
 			<li value=""></li>
 		</ul>
 	</div>
+	<div class="control">
+		<select id="type">
+           <option value ="1">冒泡排序</option>
+         <!--   <option value ="2">Saab</option>
+           <option value="3">Opel</option>
+           <option value="4">Audi</option> -->
+         </select>
+         <span>速度(请输入数字)</span>
+          <input  id="v" type="text" value="5">
+         <input  id="init" type="button" value="重置">
+         <input id="go" type="button" value="开始"> 
+	</div>
 	<script type="text/javascript">
 
 	var all=document.getElementById("all");
+    var num = new Array();
+    var type=1;
+    var v=5;
     function init(){
-    	var num = new Array();
     	for(var n=0;n<20;n++){
            var li=all.children[n];
            var newvalue=Math.ceil(Math.random()*400);
            li.value=newvalue;
            num.push(newvalue);
            li.style.height=newvalue+"px";
-           console.log(newvalue)
         }
     }
 
-    function go(){
-        
+    var mao={
+    	i:20,
+        j:0,
+        nummid:0
     }
-
+    function maopao(){
+    	if(mao.i>0){
+    		if(mao.j<mao.i-1){
+    			if(num[mao.j]>num[mao.j+1]){
+    				change(mao.j,mao.j+1,10);
+               		mao.nummid=num[mao.j];
+               		num[mao.j]=num[mao.j+1];
+               		num[mao.j+1]=mao.nummid;
+    			}
+    			mao.j=(mao.j+1);
+    			console.log(v)
+    			var maxv=(v*30)
+                var newmao=setTimeout(function(){maopao();},maxv)
+    		}
+    		else{
+    			mao.i=mao.i-1;
+    			mao.j=0;
+    			var newmao=setTimeout(function(){maopao();},(v*30))
+    		}
+    	}
+    }
+    
     window.onload=function(){
        init();
-       var i=20;
-       var j;
-       var cach;
-       while(i>0){
-       	for(j=0;j<i-1;j++){
-  			if(num[j]>num[j+1]){
-               
-  			}
+       document.getElementById("go").onclick=function(){gogo()};
+       document.getElementById("init").onclick=function(){window.location.reload()};
+       function gogo(){
+       	type=document.getElementById("type").value;
+       	v=document.getElementById("v").value;
+       	if(isNaN(v)){
+       		alert("请输入数字");
+       		window.location.reload();
        	}
+       	console.log(v)
+       	  if(type==1){
+       	  	maopao();
+       	  }
        }
     }
-
 	function change(num1,num2){
 		var li1=all.children[num1];
 		var li2=all.children[num2];
@@ -100,19 +143,27 @@
         li1.style.backgroundColor="#555";
         li2.style.backgroundColor="#555";
         move(n);
+
         function move(k){
         	n=n+1;
         	li1.style.left=(+k)+"px";
             li2.style.left=(-k)+"px";
             if(n<(x2-x1)){
-            	console.log(n)
-            	var newmove=setTimeout(function(){move(n);},10)
+            	var newmove=setTimeout(function(){move(n);},v)
             }
             else{
             	li1.style.zIndex=1;
                 li2.style.zIndex=1;
                 li1.style.backgroundColor="#789612";
                 li2.style.backgroundColor="#789612";
+                var li3;
+                li3=li1.value;
+                li1.value=li2.value;
+                li2.value=li3;
+                li1.style.height=li1.value+"px";
+                li2.style.height=li2.value+"px";
+                li1.style.left=0+"px";
+                li2.style.left=0+"px";
             }
         }
 	}
