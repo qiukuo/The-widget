@@ -8,7 +8,7 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-	<title>算法排序</title>
+	<title>排序算法</title>
 	<style type="text/css">
 	  *{
 	  	margin: 0px;
@@ -75,9 +75,11 @@
 	<script type="text/javascript">
 
 	var all=document.getElementById("all");
-    var num = new Array();
-    var type=1;
-    var v=5;
+  var num = new Array();
+  var type=1;
+  var v=5;
+
+
     function init(){
     	for(var n=0;n<20;n++){
            var li=all.children[n];
@@ -88,10 +90,27 @@
         }
     }
 
+    var quickSort = function(arr) {
+　　  if (arr.length <= 1) { return arr; }
+　　  var pivotIndex = Math.floor(arr.length / 2) ;
+　　  var pivot = arr.splice(pivotIndex, 1)[0];
+　　  var left = [];
+　　  var right = [];
+　　  for (var i = 0; i < arr.length; i++){
+　　  　　if (arr[i] < pivot) {
+　　  　　　　left.push(arr[i]);
+　　  　　} 
+          else {
+　　  　　　　right.push(arr[i]);
+　　  　　}
+　　  }
+      return quickSort(left).concat([pivot], quickSort(right));
+    };
+
     var mao={
     	i:20,
-        j:0,
-        nummid:0
+      j:0,
+      nummid:0
     }
     function maopao(){
     	if(mao.i>0){
@@ -115,6 +134,7 @@
     	}
     }
     
+
     window.onload=function(){
        init();
        document.getElementById("go").onclick=function(){gogo()};
@@ -135,37 +155,37 @@
 	function change(num1,num2){
 		var li1=all.children[num1];
 		var li2=all.children[num2];
-        var x1=li1.offsetLeft;
-        var x2=li2.offsetLeft;
-        var n=0;
-        li1.style.zIndex=2;
-        li2.style.zIndex=2;
-        li1.style.backgroundColor="#555";
-        li2.style.backgroundColor="#555";
-        move(n);
+    var x1=li1.offsetLeft;
+    var x2=li2.offsetLeft;
+    var n=0;
+    li1.style.zIndex=2;
+    li2.style.zIndex=2;
+    li1.style.backgroundColor="#555";
+    li2.style.backgroundColor="#555";
+    move(n);
 
-        function move(k){
-        	n=n+1;
-        	li1.style.left=(+k)+"px";
-            li2.style.left=(-k)+"px";
-            if(n<(x2-x1)){
-            	var newmove=setTimeout(function(){move(n);},v)
-            }
-            else{
-            	li1.style.zIndex=1;
-                li2.style.zIndex=1;
-                li1.style.backgroundColor="#789612";
-                li2.style.backgroundColor="#789612";
-                var li3;
-                li3=li1.value;
-                li1.value=li2.value;
-                li2.value=li3;
-                li1.style.height=li1.value+"px";
-                li2.style.height=li2.value+"px";
-                li1.style.left=0+"px";
-                li2.style.left=0+"px";
-            }
+    function move(k){
+    	n=n+1;
+    	li1.style.left=(+k)+"px";
+        li2.style.left=(-k)+"px";
+        if(n<(x2-x1)){
+        	var newmove=setTimeout(function(){move(n);},v)
         }
+        else{
+        	li1.style.zIndex=1;
+            li2.style.zIndex=1;
+            li1.style.backgroundColor="#789612";
+            li2.style.backgroundColor="#789612";
+            var li3;
+            li3=li1.value;
+            li1.value=li2.value;
+            li2.value=li3;
+            li1.style.height=li1.value+"px";
+            li2.style.height=li2.value+"px";
+            li1.style.left=0+"px";
+            li2.style.left=0+"px";
+        }
+    }
 	}
 	</script>
 </body>
