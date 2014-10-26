@@ -1,0 +1,295 @@
+<!-- 
+    content:    浮动的一个dome 以及自己的一些看法
+    author：litkk
+    time: 2014.10.19
+ -->
+
+<!DOCTYPE html>
+<HTML lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>时间相关和canvas的使用</title>
+	<style>
+	  #timego{
+	  	border: 1px solid ;
+	  }
+	</style>
+</head>
+<body>
+	<div id="main">
+		<canvas id="timego" width="1000" height="500px"></canvas>
+	</div>
+	<script type="text/javascript">
+	window.onload=function(){
+	var canvas=document.getElementById("timego")
+	var context=canvas.getContext("2d")
+	var r=7;
+    var nowtime=[-1,-1,-1,-1,-1,-1,-1];
+    var number= [
+        [   	
+            [0,0,1,1,1,0,0],
+            [0,1,1,0,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,0,1,1,0],
+            [0,0,1,1,1,0,0]
+        ],//0
+        [
+            [0,0,0,1,1,0,0],
+            [0,1,1,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [1,1,1,1,1,1,1]
+        ],//1
+        [
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,0,1,1,0,0,0],
+            [0,1,1,0,0,0,0],
+            [1,1,0,0,0,0,0],
+            [1,1,0,0,0,1,1],
+            [1,1,1,1,1,1,1]
+        ],//2
+        [
+            [1,1,1,1,1,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//3
+        [
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,1,0],
+            [0,0,1,1,1,1,0],
+            [0,1,1,0,1,1,0],
+            [1,1,0,0,1,1,0],
+            [1,1,1,1,1,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,1,1]
+        ],//4
+        [
+            [1,1,1,1,1,1,1],
+            [1,1,0,0,0,0,0],
+            [1,1,0,0,0,0,0],
+            [1,1,1,1,1,1,0],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//5
+        [
+            [0,0,0,0,1,1,0],
+            [0,0,1,1,0,0,0],
+            [0,1,1,0,0,0,0],
+            [1,1,0,0,0,0,0],
+            [1,1,0,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//6
+        [
+            [1,1,1,1,1,1,1],
+            [1,1,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,1,1,0,0,0],
+            [0,0,1,1,0,0,0],
+            [0,0,1,1,0,0,0],
+            [0,0,1,1,0,0,0]
+        ],//7
+        [
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//8
+        [
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,1,1,0,0,0,0]
+        ],//9
+        [
+            [0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0],
+            [0,1,1,0,0,0,0],
+            [0,1,1,0,0,0,0],
+            [0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0],
+            [0,1,1,0,0,0,0],
+            [0,1,1,0,0,0,0],
+            [0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0]
+        ]//:
+    ];
+    var balls=new Array();
+    var colors=["#3385ff","#CE33FF","#CE33FF","#FF7433","#33FF8D","#33E7FF","#EFFF33"]
+
+    function Ball(x,y,color,vx,vy){
+        this.x=x;
+        this.y=y;
+        this.color=color;
+        this.vx=vx;
+        this.vy=vy;
+        this.g=3;
+    }
+
+    var init=setInterval(draw,50);
+    function draw(){
+    	context.clearRect(0,0,1000,700)
+    	var data=new Date();
+    	var hour=data.getHours();
+    	var minute=data.getMinutes();
+    	var second=data.getSeconds();
+    	var hour1,hour2,minute1,minute2,second1,second2; 
+    	if(hour.toString().split("")[1]){
+    		 hour1=hour.toString().split("")[0];
+         	 hour2=hour.toString().split("")[1];
+    	}else{
+    		hour1=0;
+    		hour2=parseInt(hour.toString())
+    	}
+    	if(minute.toString().split("")[1]){
+    		 minute1=minute.toString().split("")[0];
+    	     minute2=minute.toString().split("")[1];
+    	}else{
+    		minute1=0;
+    		minute2=parseInt(minute.toString())
+    	}
+    	if(second.toString().split("")[1]){
+    		 second1=second.toString().split("")[0];
+    	     second2=second.toString().split("")[1];
+    	}else{
+    		second1=0;
+    		second2=parseInt(second)
+    	}
+
+    	if(nowtime[0]!==hour1){
+            nowtime[0]=hour1;
+            create_ball(nowtime[0],(r+1)*5+10,10)
+    	}
+    	if(nowtime[1]!==hour2){
+            nowtime[1]=hour2;
+            create_ball(nowtime[1],(r+1)*15+40,10)
+    	}
+    	if(nowtime[2]!==minute1){
+            nowtime[2]=minute1;
+            create_ball(nowtime[2],(r+1)*40+40,10)
+    	}
+    	if(nowtime[3]!==minute2){
+            nowtime[3]=minute2;
+            create_ball(nowtime[3],(r+1)*55+40,10)
+    	}
+    	if(nowtime[4]!==second1){
+            nowtime[4]=second1;
+            create_ball(nowtime[4],(r+1)*80+40,10)
+    	}
+    	if(nowtime[5]!==second2){
+            nowtime[5]=second2;
+            create_ball(nowtime[5],(r+1)*95+40,10)
+    	}
+
+    	draw_num((r+1)*5+10,10,hour1,context);
+    	draw_num((r+1)*15+40,10,hour2,context);
+    	draw_num((r+1)*30+40,10,10,context);
+    	draw_num((r+1)*40+40,10,minute1,context);
+        draw_num((r+1)*55+40,10,minute2,context);
+        draw_num((r+1)*70+40,10,10,context);
+        draw_num((r+1)*80+40,10,second1,context);
+        draw_num((r+1)*95+40,10,second2,context);
+        draw_ball();
+    }
+
+    function create_ball(num,x,y){
+    	var newnum=number[num];
+        for(var i=0;i<10;i++){
+    		for(var j=0;j<7;j++){
+                if(newnum[i][j]==1){
+                   var k=Math.floor(Math.random()*7);
+                   var vx=Math.floor(Math.random()*3-5);
+                   var vy=Math.floor(Math.random()*3-5);
+                   var newball= new Ball(x+j*(r+1)*2+r,y+i*(r+1)*2+r,colors[k],vx,vy)
+                   balls.push(newball)
+                }
+    		}
+    	}
+    }
+    
+    function draw_ball(){
+    	for(var n=0;n<1000;n++){
+    	    if(!balls[n]){
+    	    	continue;
+    	    } 
+    		if(balls[n].x<-r){
+    			balls.splice(n,1)
+    		}
+    		balls[n].vy=(balls[n].vy+2);
+            balls[n].x=balls[n].x+balls[n].vx;
+            balls[n].y=balls[n].y+balls[n].vy;
+            if(balls[n].y>500-r){
+            	balls[n].y=500-r;
+            	balls[n].vy=-balls[n].vy*0.8
+            }
+            context.fillStyle=balls[n].color;
+            context.beginPath();
+            context.arc(balls[n].x,balls[n].y,r,0,Math.PI*2,true);
+            context.closePath();
+            context.fill();
+    	}
+    }
+
+    function draw_num(x,y,num){
+    	var newnum=number[num];
+    	for(var i=0;i<10;i++){
+    		for(var j=0;j<7;j++){
+                if(newnum[i][j]==1){
+                    context.fillStyle="#77B2FC";
+                    context.beginPath();
+                    context.arc(x+j*(r+1)*2+r,y+i*(r+1)*2+r,r,0,Math.PI*2,true);
+                    context.closePath();
+                    context.fill();
+                }
+    		}
+    	}
+    }
+}
+	</script>
+</body>
+</html>
