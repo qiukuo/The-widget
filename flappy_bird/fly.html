@@ -1,0 +1,30 @@
+<!-- 
+    content:    一个小游戏
+    author：litkk
+    time: 2014.10.19
+ -->
+
+<!DOCTYPE html>
+<HTML lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>fly</title>
+<head>
+<body>
+   <canvas id="fly" width="800" height="600"></canvas>
+</body>
+<script type="text/javascript">
+  var c=document.getElementById("fly");
+  var context=c.getContext("2d");
+  var newback = new Image();
+  var bigen = new Image();
+  bigen.src="Images/6.png"
+  newback.src = "Images/1.png";
+
+
+  window.onload = function () {   
+   context.drawImage(newback, 0, 0);
+   context.drawImage(bigen, 250, 150);  
+  }
+</script>
+</html>
