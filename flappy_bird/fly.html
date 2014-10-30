@@ -17,14 +17,88 @@
   var c=document.getElementById("fly");
   var context=c.getContext("2d");
   var newback = new Image();
-  var bigen = new Image();
-  bigen.src="Images/6.png"
+  var bigenimg = new Image();
+  var down=new Image();
+  var isfly=false;
+
+  down.src="Images/5.png"
+  bigenimg.src="Images/6.png"
   newback.src = "Images/1.png";
 
-
-  window.onload = function () {   
-   context.drawImage(newback, 0, 0);
-   context.drawImage(bigen, 250, 150);  
+  var bird={
+    vx:0,
+    vy:0,
+    chi:53,
+    x:360,
+    y:200,
+    to:0,
+    g:1
   }
+
+  var roll=new Array();
+  var birdimg=new Image();
+  var birdimg1=new Image();
+  var birdimg2=new Image();
+  var birdimg3=new Image();
+
+  birdimg1.src="Images/birds.png"
+  birdimg2.src="Images/tbirds.png"
+  birdimg3.src="Images/dbirds.png"
+
+  document.onkeydown=function(e){
+    var e=event.srcElement;
+    if(event.keyCode==32){
+    }
+  }
+  
+  function changebird(){
+    if(bird.chi==0){
+       bird.chi=53
+    }
+    else if(bird.chi==53){
+      bird.chi=106
+    }
+    else if(bird.chi==106){
+      bird.chi=0
+    }
+
+    bird.y=bird.y+bird.vy
+    bird.vy=bird.vy+bird.g
+
+    if(isfly==false&& bird.y>220){
+      bird.vy=-8
+    }
+  }
+  
+  function changedown(){
+
+  }
+  var go=setInterval(init,50)
+  function init(){
+    bigen()
+    changebird()
+    context.drawImage(birdimg1,bird.chi, 0,53,45,bird.x,bird.y,80,70)
+    // if(bird.vy<0){
+    //    context.drawImage(birdimg2,bird.chi, 0,210,160,bird.x,bird.y,80,70); 
+    // } 
+    // if(bird.vy>0){
+    //    context.drawImage(birdimg3,bird.chi, 0,210,160,bird.x,bird.y,80,70); 
+    // } 
+    // if(bird.vy==0){
+    //    context.drawImage(birdimg1,bird.chi, 0,210,160,bird.x,bird.y,80,70); 
+    // } 
+  }
+
+  function bigen(){   
+    context.drawImage(newback, 0, 0);
+    context.drawImage(bigenimg, 0, 0,300,80,250,100,300,80);  
+    context.drawImage(bigenimg, 0, 170,300,150,280,300,300,150);  
+    context.drawImage(down, 0, 500,800,100);
+  }
+  window.onload=function(){
+    bigen()
+    init()
+  }
+
 </script>
 </html>
