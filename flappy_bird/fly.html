@@ -18,9 +18,12 @@
   var context=c.getContext("2d");
   var newback = new Image();
   var bigenimg = new Image();
+  var rolltop=new Image();
+  var rolldown=new Image();
   var down=new Image();
   var isfly=false;
-
+  rolltop.src="Images/top.png"
+  rolldown.src="Images/down.png"
   down.src="Images/5.png"
   bigenimg.src="Images/6.png"
   newback.src = "Images/1.png";
@@ -32,10 +35,22 @@
     x:360,
     y:200,
     to:0,
-    g:1
+    g:2
   }
 
   var roll=new Array();
+  roll[0]={
+    top:-200,
+    x:800
+  }
+  roll[1]={
+    top:-300,
+    x:1084
+  }
+  roll[2]={
+    top:-300,
+    x:1368
+  }
   var birdimg=new Image();
   var birdimg1=new Image();
   var birdimg2=new Image();
@@ -48,6 +63,13 @@
   document.onkeydown=function(e){
     var e=event.srcElement;
     if(event.keyCode==32){
+      console.log("xx")
+      if(isfly==false){
+        isfly=true
+      }
+      else{
+        bird.vy=-16
+      }
     }
   }
   
@@ -66,39 +88,89 @@
     bird.vy=bird.vy+bird.g
 
     if(isfly==false&& bird.y>220){
-      bird.vy=-8
+      bird.vy=-14
+    }
+    context.drawImage(birdimg1,bird.chi, 0,53,45,bird.x,bird.y,80,70)
+    // if(bird.vy<0){
+    //   context.translate(210, 160);
+    //   context.ratate(45*Math.PI/180);
+    //   context.drawImage(birdimg1,bird.chi, 0,53,45,0,0,80,70); 
+    //   context.ratate(-45*Math.PI/180);
+    //   context.translate(-210, -160);
+    // } 
+    // if(bird.vy>0){
+    //    context.drawImage(birdimg1,bird.chi, 0,53,45,bird.x,bird.y,80,70); 
+    // } 
+    // if(bird.vy==0){
+    //    context.drawImage(birdimg1,bird.chi, 0,53,45,bird.x,bird.y,80,70); 
+    // } 
+  }
+
+  var down_x=0;
+  function changedown(){
+    if(down_x>-600){
+      context.drawImage(down, down_x, 500,800,100);
+      context.drawImage(down, down_x+800, 500,800,100);
+      down_x=down_x-3;
+    }else{
+      context.drawImage(down, down_x, 500,800,100);
+      context.drawImage(down, down_x+800, 500,800,100);
+      down_x=0
     }
   }
-  
-  function changedown(){
-
-  }
-  var go=setInterval(init,50)
+  var go=setInterval(init,40)
   function init(){
     bigen()
     changebird()
-    context.drawImage(birdimg1,bird.chi, 0,53,45,bird.x,bird.y,80,70)
-    // if(bird.vy<0){
-    //    context.drawImage(birdimg2,bird.chi, 0,210,160,bird.x,bird.y,80,70); 
-    // } 
-    // if(bird.vy>0){
-    //    context.drawImage(birdimg3,bird.chi, 0,210,160,bird.x,bird.y,80,70); 
-    // } 
-    // if(bird.vy==0){
-    //    context.drawImage(birdimg1,bird.chi, 0,210,160,bird.x,bird.y,80,70); 
-    // } 
+    if(isfly==true){
+      changeroll()
+       die()
+    }
+    changedown()
   }
-
+  function changeroll(){
+    for(var i=0;i<3;i++){
+      if(roll[i].x<-52){
+        roll[i].x=800
+        // roll[i].top=(Math.random())
+      }
+      if(roll[i].x>-100){
+        roll[i].x=roll[i].x-3
+      }
+      context.drawImage(rolltop, roll[i].x,roll[i].top);
+      context.drawImage(rolldown, roll[i].x,roll[i].top+550);
+    }
+  }
   function bigen(){   
     context.drawImage(newback, 0, 0);
+    if(isfly==false){
     context.drawImage(bigenimg, 0, 0,300,80,250,100,300,80);  
     context.drawImage(bigenimg, 0, 170,300,150,280,300,300,150);  
-    context.drawImage(down, 0, 500,800,100);
+    }
+  }
+  function die(){
+    var birdxy=new Array()
+    birdxy=[[bird.x,bird.y],[bird.x,bird.y+70],[bird.x+80,bird.y+70],[bird.x+80,bird.y]]
+    var rollxy=new Array()
+    rollxy[0]=[[roll[0].x,roll[0].top+420],[roll[1].x,roll[1].top+420],[roll[2].x,roll[2].top+420]]
+    rollxy[1]=[[roll[0].x,roll[0].top+550],[roll[1].x,roll[1].top+550],[roll[2].x,roll[2].top+550]]
+    rollxy[2]=[[roll[0].x+52,roll[0].top+420],[roll[1].x+52,roll[1].top+420],[roll[2].x+52,roll[2].top+420]]
+    rollxy[3]=[[roll[0].x+52,roll[0].top+550],[roll[1].x+52,roll[1].top+550],[roll[2].x+52,roll[2].top+550]]
+
+    for(var i=0;i<4;i++){
+        for(var j=0;j<3;j++){
+          if(birdxy[i][0]>rollxy[0][j][0]&&birdxy[i][0]<rollxy[2][j][0]&&birdxy[i][1]>rollxy[2][j][1]){
+              console.log("x")
+          }
+          if(birdxy[i][0]>rollxy[1][j][0]&&birdxy[i][0]<rollxy[4][j][0]&&birdxy[i][1]<rollxy[2][j][1]){
+            console.log("x")
+          }
+        }
+    }
   }
   window.onload=function(){
-    bigen()
     init()
-  }
+  }   
 
 </script>
 </html>
