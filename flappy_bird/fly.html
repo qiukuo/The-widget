@@ -11,22 +11,60 @@
 	<title>fly</title>
 <head>
 <body>
-   <canvas id="fly" width="800" height="600"></canvas>
+  <audio id="Sdie" src="Sounds/Die.wav" preload="preload"></audio>
+  <audio id="Shit" src="Sounds/Hit.wav" preload="preload"></audio>
+  <audio id="Spoint" src="Sounds/Point.wav" preload="preload"></audio>
+  <audio id="Swing"src="Sounds/Wing.wav" preload="preload"></audio>
+  <canvas id="fly" width="800" height="600"></canvas>
 </body>
 <script type="text/javascript">
+  var sdie=document.getElementById("Sdie");
+  var shit=document.getElementById("Shit");
+  var sspoint=document.getElementById("Spoint");
+  var sswing=document.getElementById("Swing");
+  
+
   var c=document.getElementById("fly");
   var context=c.getContext("2d");
+  var fen=new Image()
   var newback = new Image();
   var bigenimg = new Image();
   var rolltop=new Image();
   var rolldown=new Image();
   var down=new Image();
-  var isfly=false;
+  var isfly=0
+  // 0 开始  1 飞  2over
   rolltop.src="Images/top.png"
   rolldown.src="Images/down.png"
   down.src="Images/5.png"
   bigenimg.src="Images/6.png"
   newback.src = "Images/1.png";
+  fen.src="Images/fen.png"
+  
+  function gogogo(){
+    fennum=0;
+    isfly=0;
+    bird={
+      vx:0,
+      vy:0,
+      chi:53,
+      x:360,
+      y:200,
+      g:2
+    }
+    roll[0]={
+      top:-200,
+      x:800
+    }
+    roll[1]={
+      top:-300,
+      x:1084
+    }
+    roll[2]={
+      top:-100,
+      x:1368
+    }
+  }
 
   var bird={
     vx:0,
@@ -34,10 +72,9 @@
     chi:53,
     x:360,
     y:200,
-    to:0,
     g:2
   }
-
+  
   var roll=new Array();
   roll[0]={
     top:-200,
@@ -48,9 +85,10 @@
     x:1084
   }
   roll[2]={
-    top:-300,
+    top:-100,
     x:1368
   }
+
   var birdimg=new Image();
   var birdimg1=new Image();
   var birdimg2=new Image();
@@ -63,16 +101,43 @@
   document.onkeydown=function(e){
     var e=event.srcElement;
     if(event.keyCode==32){
-      console.log("xx")
-      if(isfly==false){
-        isfly=true
+      if(isfly==0){
+        isfly=1
       }
-      else{
+      if(isfly==1){
+        sswing.load();
+        sswing.play();
         bird.vy=-16
       }
     }
+    if(event.keyCode== 65 ){
+      bird.y=bird.y+1
+      console.log(bird.y)
+    }
+    if(event.keyCode==83){
+      bird.y=bird.y-1 
+    }
+    if(event.keyCode==13){
+      gogogo() 
+    }
+  } 
+  var fennum=0;
+  function changefen(){
+    var sfen=fennum.toString();
+    var afen=sfen.split("");
+    for(var i=0;i<afen.length;i++){
+      for(var j=0;j<10;j++){
+        if(parseInt(afen[i])==j){
+          if(j<5){
+            context.drawImage(fen,25*j,0,25,32,370+i*25,30,25,32)
+          }
+          else{
+            context.drawImage(fen,25*(j-5),32,25,32,370+i*25,30,25,32)
+          }
+        }
+      }
+    }
   }
-  
   function changebird(){
     if(bird.chi==0){
        bird.chi=53
@@ -87,8 +152,11 @@
     bird.y=bird.y+bird.vy
     bird.vy=bird.vy+bird.g
 
-    if(isfly==false&& bird.y>220){
+    if(isfly==0&& bird.y>220){
       bird.vy=-14
+    }
+    if(bird.y<-10){
+      bird.y=-10
     }
     context.drawImage(birdimg1,bird.chi, 0,53,45,bird.x,bird.y,80,70)
     // if(bird.vy<0){
@@ -120,54 +188,98 @@
   }
   var go=setInterval(init,40)
   function init(){
-    bigen()
-    changebird()
-    if(isfly==true){
-      changeroll()
-       die()
+    if(isfly==0){
+      bigen()
+      changebird()
+      changedown()
     }
-    changedown()
+    if(isfly==1){
+      context.drawImage(newback, 0, 0);
+      changebird()
+      changeroll()
+      changedown()
+      changefen()
+      die()
+    }
+    if(isfly==2){
+      dieover()
+      changefen()
+    }
   }
   function changeroll(){
     for(var i=0;i<3;i++){
       if(roll[i].x<-52){
         roll[i].x=800
-        // roll[i].top=(Math.random())
+        roll[i].top=(Math.random()*200-300)
       }
       if(roll[i].x>-100){
         roll[i].x=roll[i].x-3
+      }
+      if(roll[i].x>350&&roll[i].x<354){
+        get_point();
       }
       context.drawImage(rolltop, roll[i].x,roll[i].top);
       context.drawImage(rolldown, roll[i].x,roll[i].top+550);
     }
   }
+
+  function get_point(){
+    sspoint.play();
+    fennum=fennum+1;
+  }
   function bigen(){   
     context.drawImage(newback, 0, 0);
-    if(isfly==false){
+    if(isfly==0){
     context.drawImage(bigenimg, 0, 0,300,80,250,100,300,80);  
     context.drawImage(bigenimg, 0, 170,300,150,280,300,300,150);  
     }
   }
   function die(){
-    var birdxy=new Array()
-    birdxy=[[bird.x,bird.y],[bird.x,bird.y+70],[bird.x+80,bird.y+70],[bird.x+80,bird.y]]
     var rollxy=new Array()
+    var birdxy=new Array()
+    birdxy=[[bird.x,bird.y+17],[bird.x,bird.y+55],[bird.x+60,bird.y+55],[bird.x+60,bird.y+17]]
     rollxy[0]=[[roll[0].x,roll[0].top+420],[roll[1].x,roll[1].top+420],[roll[2].x,roll[2].top+420]]
     rollxy[1]=[[roll[0].x,roll[0].top+550],[roll[1].x,roll[1].top+550],[roll[2].x,roll[2].top+550]]
     rollxy[2]=[[roll[0].x+52,roll[0].top+420],[roll[1].x+52,roll[1].top+420],[roll[2].x+52,roll[2].top+420]]
     rollxy[3]=[[roll[0].x+52,roll[0].top+550],[roll[1].x+52,roll[1].top+550],[roll[2].x+52,roll[2].top+550]]
-
     for(var i=0;i<4;i++){
         for(var j=0;j<3;j++){
-          if(birdxy[i][0]>rollxy[0][j][0]&&birdxy[i][0]<rollxy[2][j][0]&&birdxy[i][1]>rollxy[2][j][1]){
-              console.log("x")
+          if(birdxy[i][0]>rollxy[0][j][0]&&birdxy[i][0]<rollxy[2][j][0]&&birdxy[i][1]<rollxy[2][j][1]){
+            isfly=2
+            shit.play()
+            sdie.play()
           }
-          if(birdxy[i][0]>rollxy[1][j][0]&&birdxy[i][0]<rollxy[4][j][0]&&birdxy[i][1]<rollxy[2][j][1]){
-            console.log("x")
+          if(birdxy[i][1]>500){
+            isfly=2
+            shit.play()
+            sdie.play()
+          }
+          if(birdxy[i][0]>rollxy[1][j][0]&&birdxy[i][0]<rollxy[3][j][0]&&birdxy[i][1]>rollxy[1][j][1]){
+            isfly=2
+            shit.play()
+            sdie.play()
           }
         }
-    }
+    } 
   }
+  function dieover(){
+    context.drawImage(newback, 0, 0);
+    if(bird.y<440){
+       bird.y=bird.y+bird.vy
+       bird.vy= bird.vy+bird.g
+    }else{
+      bird.y=450    
+    }
+    for(var i=0;i<3;i++){
+      context.drawImage(rolltop, roll[i].x,roll[i].top);
+      context.drawImage(rolldown, roll[i].x,roll[i].top+550);
+    }
+    context.drawImage(bigenimg, 0, 80,300,80,250,bird.y-100,300,80); 
+    context.drawImage(down, down_x, 500,800,100);
+    context.drawImage(down, down_x+800, 500,800,100);
+    context.drawImage(birdimg1,bird.chi, 0,53,45,bird.x,bird.y,80,70)
+  }
+
   window.onload=function(){
     init()
   }   
