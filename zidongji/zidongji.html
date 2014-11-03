@@ -1,0 +1,268 @@
+<!-- 
+    content:   自动机作业
+    author：litkk
+    time: 2014.10.19
+ -->
+
+<!DOCTYPE html>
+<HTML lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>形式语言</title>
+	<style>
+	*{
+		margin: 0px;
+		padding: 0px;
+	}
+    body{
+        width:600px;
+        margin: 50px auto;
+    }
+    textarea{
+        width: 400px;
+        height: 200px;
+    }
+    div{
+        margin-top: 50px;
+    }
+    .two input{
+        width: 500px;
+        margin-top: 10px;
+    }
+	</style>
+</head>
+    <body>
+        <div class="one">
+            <input id="go" type="text" value="4">
+        </div>
+        <textarea id="mes">
+        </textarea>
+        <div class="control">
+            <input type="button" id="ks" value="开始" onclick="main()">
+            <input type="button" id="ks" value="从文件中获取" onclick="getnew()">
+            <input type="button" id="ks" value="使用内置文法" onclick="getold()">
+        </div>
+
+        <div class="two">
+             <input id="twoin" type="text" >
+             <input id="twoout" type="text" >
+             <input type="button" value="开始" onclick="twogo()">
+        </div>
+        <!-- 外置文法 -->
+        <script type="text/javascript" src="wenfa.js"></script>
+        <!-- 第一次作业的代码 -->
+    	<script type="text/javascript">
+            function getnew(){
+                wen=wen1;
+            }
+            function getold(){
+               wen={
+               fi:"S",
+               se:"a,b",
+               th:"S%a,S%aS",
+               fo:"S" 
+            };
+            }
+            // 初始的数据
+            var wen={
+               fi:"S",
+               se:"a,b",
+               th:"S%a,S%aS",
+               fo:"S" 
+            };
+
+            var wenf=new Array();
+            var wenc=new Array();
+            var wens=new Array();
+            var end=wen.fo;
+            var mes=document.getElementById("mes");
+
+            function init(){
+                mesShow("");
+                wenf=new Array();
+                wenc=new Array();
+                wens=new Array();
+                end=wen.fo;
+            }
+            // 信息提示函数
+            function mesShow(mestext){
+                mes.value=mestext;
+            }
+
+            function main(){
+                init()
+                var max=document.getElementById("go").value;
+                isOk1()
+                for(var i=0;i<max;i++){
+                         gogogo();
+                    }
+            } 
+            // 判定是否存在的工具函数
+            function isIn(a,array){
+                var re=false;
+                for(var i=0;i<array.length;i++){
+                    if(a==array[i]){
+                        re=true;
+                    }
+                }
+                return re;
+            }
+
+            // 判定格式是否正确
+            function isOk1(){
+                wenf=wen.fi.split(",");
+                for(var i=0;i<wenf.length;i++){
+                    wenf[i]=wenf[i].split("")
+                    if(wenf[i][1]){
+                        mesShow("false:非终极符格式错误");
+                        return false;
+                    }
+                }
+                if(!isIn(wen.fo,wenf)){
+                    mesShow("false:开始符号不在非终极符中");
+                    return false;
+                }
+                // 终极符错误
+                wenc=(wen.se).split(",");
+                for(var i=0;i<wenc.length;i++){
+                    var changewenc=wenc[i].split("");
+                    for(var n=0;n<changewenc.length;n++){
+                        if(changewenc[1]){
+                            mesShow("false:终极符格式错误");
+                            return false;
+                        }
+                    }
+                    
+                    if(isIn(wenc[i],wenf)){
+                        mesShow("false:终极符不可以和非终级符相同");
+                        return false;
+                    }
+                }
+                // 产生式变化
+                var nwens=wen.th.split(",");
+                for(var i=0;i<nwens.length;i++){
+                    wens[i]=new Array()
+                    wens[i][0]=(wen.th).split(",")[i].split("%")[0];
+                    wens[i][1]=(wen.th).split(",")[i].split("%")[1];
+                    wens[i][0]= wens[i][0].split("");
+                    wens[i][1]= wens[i][1].split("");
+                }
+                // 左部
+                for(var i=0;i<wens.length;i++){
+                    if(wens[i][0][1]){
+                        mesShow("false:产生式左部有错误");
+                        return false;
+                    }
+                    if(!isIn(wens[i][0][0],wenf)){
+                        mesShow("false:产生式左部不在非终极符中");
+                        return false;
+                    }
+                }
+                // 右部
+
+                for(var i=0;i<wens.length;i++){
+                    for(var n=0;n<wens[i][1].length;n++){
+                        if(!isIn(wens[i][1][n],wenf)&&!isIn(wens[i][1][n],wenc)){
+                            mesShow("false:产生式右部中不在非终极符或终级符中");
+                            return false;
+                        }
+                    }
+                }
+            }
+            function gogogo(){
+                var newend=end.split("");
+                var cnewend=end.split("");
+                var mnewend=end.split("");
+                var cmnewend=end.split("");
+                for(var i=0;i<newend.length;i++){
+                    q:for(var n=0;n<wens.length;n++){
+                       if(newend[i]==wens[n][0][0]){
+                          for(var j=0;j<wens[n][1].length;j++){
+                                if(isIn(wens[n][1][j],wenf)){
+                                    cnewend.splice(i,1);
+                                    for(var k=0;k<wens[n][1].length;k++){
+                                        cnewend.splice(i+k,0,wens[n][1][k])
+                                    }
+
+                                    if(n==0){
+                                        cmnewend.splice(i,1);
+                                        for(var k=0;k<wens[1][1].length;k++){
+                                            cmnewend.splice(i+k,0,wens[1][1][k])
+                                        }
+                                    }
+
+                                    if(n==1){
+                                        cmnewend.splice(i,1);
+                                        for(var k=0;k<wens[0][1].length;k++){
+                                            cmnewend.splice(i+k,0,wens[0][1][k])
+                                        }
+                                    }
+                                    break q
+                                }
+                            }
+                        }
+                    }
+                }
+                
+
+                end=cnewend.join("")
+                mnewend=cmnewend.join("");
+                mes.value=mes.value+"\n"+mnewend
+            }     
+      	</script>
+
+        <!-- 第二次作业的代码 -->
+        <script type="text/javascript">
+            function twogo(){
+                var type=0;
+                var twoOk=true
+                var twoin=document.getElementById("twoin").value
+                var twoout=document.getElementById("twoout");
+                var twoina=twoin.split("")
+                for(var i=0;i<twoina.length;i++){
+                   if(!(twoina[i]==="0")&&!(twoina[i]==="1")){
+                        twoout.value="输入格式错误"
+                        console.log(33)
+                        twoOk=false
+                    }
+                }
+                if(twoOk){
+                    for(var i=0;i<twoina.length;i++){
+                        if(type==0){
+                        if(twoina[i]==1){
+                            type=1;
+                        }
+                        else{
+                            type=0
+                        }
+                        }
+                        else if(type==1){
+                        if(twoina[i]==1){
+                            type=2
+                        }
+                        else{
+                            type=0
+                        }
+                        }
+                        else if(type==2){
+                        if(twoina[i]==0){
+                            type=3
+                        }
+                        else{
+                            type=2
+                        }
+                        }
+                        if(type==3){
+                        twoout.value="符合";
+                        break;
+                        }
+                        if(i==twoina.length-1){
+                            twoout.value="不符合"
+                        }
+                    }
+                }
+            }
+        </script>
+    </body>
+</html>
+
