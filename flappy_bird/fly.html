@@ -8,7 +8,18 @@
 <HTML lang="en">
 <head>
 	<meta charset="utf-8">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
 	<title>fly</title>
+  <style>
+  *{
+    margin: 0px;
+    padding: 0px;
+  }
+  #fly{
+  overflow: hidden;
+  }
+  </style>
 <head>
 <body>
   <audio id="Sdie" src="Sounds/Die.wav" preload="preload"></audio>
@@ -16,9 +27,9 @@
   <audio id="Spoint" src="Sounds/Point.wav" preload="preload"></audio>
   <audio id="Swing"src="Sounds/Wing.wav" preload="preload"></audio>
   <canvas id="fly" width="800" height="600"></canvas>
-  <span> 空格键起飞  回车键复位</span>
 </body>
 <script type="text/javascript">
+ 
   var sdie=document.getElementById("Sdie");
   var shit=document.getElementById("Shit");
   var sspoint=document.getElementById("Spoint");
@@ -26,7 +37,10 @@
   
 
   var c=document.getElementById("fly");
+  c.width=screen.width
+  c.height=screen.height
   var context=c.getContext("2d");
+  context.scale(screen.width/800,screen.height/600)
   var fen=new Image()
   var newback = new Image();
   var bigenimg = new Image();
@@ -99,6 +113,17 @@
   birdimg2.src="Images/tbirds.png"
   birdimg3.src="Images/dbirds.png"
 
+    document.addEventListener('touchstart', function (e) {
+      if(isfly==0){
+        isfly=1
+      }
+      if(isfly==1){
+        sswing.load();
+        sswing.play();
+        bird.vy=-16
+      }
+    });
+
   document.onkeydown=function(e){
     var e=event.srcElement;
     if(event.keyCode==32){
@@ -110,13 +135,6 @@
         sswing.play();
         bird.vy=-16
       }
-    }
-    if(event.keyCode== 65 ){
-      bird.y=bird.y+1
-      console.log(bird.y)
-    }
-    if(event.keyCode==83){
-      bird.y=bird.y-1 
     }
     if(event.keyCode==13){
       gogogo() 
@@ -263,6 +281,7 @@
         }
     } 
   }
+
   function dieover(){
     context.drawImage(newback, 0, 0);
     if(bird.y<440){
