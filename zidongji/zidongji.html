@@ -46,7 +46,8 @@
         <div class="two">
              <input id="twoin" type="text" >
              <input id="twoout" type="text" >
-             <input type="button" value="开始" onclick="twogo()">
+             <input type="button" value="第二次实验开始" onclick="twogo()">
+             <input type="button" value="第三次实验开始" onclick="threego()">
         </div>
         <!-- 外置文法 -->
         <script type="text/javascript" src="wenfa.js"></script>
@@ -258,6 +259,69 @@
                         }
                         if(i==twoina.length-1){
                             twoout.value="不符合"
+                        }
+                    }
+                }
+            }
+        </script>
+
+        <!-- 第三次作业代码 -->
+        <script type="text/javascript">
+        function threego(){
+                var type=1;
+                var threeOk=true
+                var threein=document.getElementById("twoin").value
+                var threeout=document.getElementById("twoout");
+                var threeina=threein.split("")
+                for(var i=0;i<threeina.length;i++){
+                   if(!(threeina[i]==="0")&&!(threeina[i]==="1")){
+                        twoout.value="输入格式错误"
+                        threeOk=false
+                    }
+                }
+                if(threeOk){
+                    for(var i=0;i<threeina.length;i++){
+                        if(type==0){
+                            if(threeina[i]==1){
+                                type=3;
+                            }
+                            else{
+                                type=1
+                            }
+                        }
+                        else if(type==1){
+                            if(threeina[i]==1){
+                                type=2
+                            }
+                            else{
+                                type=0
+                            }
+                        }
+                        else if(type==2){
+                            if(threeina[i]==0){
+                                type=1
+                            }
+                            else{
+                                type=3
+                            }
+                        }
+
+                        else if(type==3){
+                            if(threeina[i]==0){
+                                type=0
+                            }
+                            else{
+                                type=2
+                            }
+                        }
+                        
+                        if(i==threeina.length-1){
+                            if(type==3||type==0){
+                                 twoout.value="符合";
+                            }
+                            else{
+                                twoout.value="不符合";
+                            }
                         }
                     }
                 }
