@@ -27,6 +27,7 @@
   <audio id="Spoint" src="Sounds/Point.wav" preload="preload"></audio>
   <audio id="Swing"src="Sounds/Wing.wav" preload="preload"></audio>
   <canvas id="fly" width="800" height="600"></canvas>
+  <p>空格起飞,回车复位</p>
 </body>
 <script type="text/javascript">
  
@@ -37,10 +38,11 @@
   
 
   var c=document.getElementById("fly");
-  c.width=screen.width
-  c.height=screen.height
+  // 移动端注释掉了
+  // c.width=screen.width
+  // c.height=screen.height
   var context=c.getContext("2d");
-  context.scale(screen.width/800,screen.height/600)
+  // context.scale(screen.width/800,screen.height/600)
   var fen=new Image()
   var newback = new Image();
   var bigenimg = new Image();
