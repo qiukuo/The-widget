@@ -1,6 +1,6 @@
 var wen1={
 	fi:"S",
     se:"a,b,c",
-    th:"S%bS,S%bc",
+    th:"S%bSaa,S%bc",
     fo:"S"
 }

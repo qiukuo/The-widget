@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>高速缓存</title>
+	<link rel="stylesheet" type="text/css" href="reset.css" />
+	<link rel="stylesheet" type="text/css" href="cache.css" />
+</head>
+<body>
+	<div id="control">
+		<h1>直接映像</h1>
+		<p>初始化的组数仅为显示的内存，显示的内存过多映像速度。</p>
+		<input class="in1" type="text" placeholder="请输入主存组数">
+		<input class="bu4" type="button" value="初始化">
+		<input class="in2" type="text" placeholder="请输入主存地址(10进制)" type="text" value="">
+		<input class="bu5" type="button" value="查找">
+		<input class="bu1" type="button" value="直接映像">
+		<input class="bu2" type="button" value="全相联映像">
+		<input class="bu3" type="button" value="组相联映像">
+	</div>
+	<div id="vi">
+		<span>查找数(10) :</span><span></span><br>
+		<span>查找数( 2)前11位地址:</span><span></span>
+	</div>
+	<div id="con">
+		<div id="con_left">
+			<ul>
+				<li><span class="flag1">标记</span><span class="cache">页数</span></li>
+				<li><span class="flag">-1</span><span class="cache" title="0">第0页</span></li>
+				<li><span class="flag">-1</span><span class="cache" title="1">第1页</span></li>
+				<li><span class="flag">-1</span><span class="cache" title="2">第2页</span></li>
+				<li><span class="flag">-1</span><span class="cache" title="3">第3页</span></li>
+				<li><span class="flag">-1</span><span class="cache" title="4">第4页</span></li>
+				<li><span class="flag">-1</span><span class="cache" title="5">第5页</span></li>
+				<li><span class="flag">-1</span><span class="cache" title="6">第6页</span></li>
+				<li><span class="flag">-1</span><span class="cache" title="7">第7页</span></li>
+				<li><span class="flag">-1</span><span class="cache" title="8">第8页</span></li>
+				<li><span class="flag">-1</span><span class="cache" title="9">第9页</span></li>
+				<li><span class="flag">-1</span><span class="cache" title="10">第10页</span></li>
+				<li><span class="flag">-1</span><span class="cache" title="11">第11页</span></li>
+				<li><span class="flag">-1</span><span class="cache" title="12">第12页</span></li>
+				<li><span class="flag">-1</span><span class="cache" title="13">第13页</span></li>
+				<li><span class="flag">-1</span><span class="cache" title="14">第14页</span></li>
+				<li><span class="flag">-1</span><span class="cache" title="15">第15页</span></li>
+			</ul>
+		</div>
+		<div id="con_right">
+		</div>
+	</div>
+	<script type="text/javascript" src="jquery.js"></script>
+	<script type="text/javascript" src="cache.js"></script>
+</body>
+</html>

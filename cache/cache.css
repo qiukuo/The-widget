@@ -1,0 +1,41 @@
+body{
+	padding: 50px;
+	background-color: #E2E2E2;
+}
+span{
+	display: inline-block;
+	border: 1px solid #555;
+	padding:5px;
+
+}
+ul{
+	display: inline-block;
+}
+#vi span{
+	border: none;
+}
+.flag1{
+	width: 75px;
+}
+.flag{
+	width: 75px;
+}
+.cache{
+	width: 50px;
+	cursor: pointer;
+}
+#con_left{
+	width: 170px;
+	float: left;
+}
+#con_right{
+	margin-top: 27px;
+	float: left;
+}
+.cun{
+	width: 50px;
+}
+.shoot{
+	background-color: #000;
+	color:#fff;
+}
