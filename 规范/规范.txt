@@ -1,0 +1,188 @@
+HTML的命名和格式
+
+1. 所有文件使用下划线连接，慎用缩写。
+
+例子：
+this_is_a_test.html
+
+x：qlf.html
+√：qualification.html
+
+
+2. HTML层级采用缩进采用4个空格。
+
+
+3. id名称用驼峰式，class名称用中划线连接。禁止使用数字等不明意义的名称。
+
+例子：
+<div id=“infoContent” class=“info-content”></div>
+
+x：<li class=“li1”></li>
+x：<li class=“li2”></li>
+
+
+4. css与HTML代码分离：为确保代码的可维护性，慎用内联等方式编写代码。
+
+高可读性的HTML代码
+
+1. 在合适的地方使用合适的标签：为了代码的可维护性以及可读性，在编写代码时请不要只是注意浏览器上的实现，也要注意标签的使用是否合适。
+
+例子：
+用<h1> ~ <h6>实现标题，而不是<p>+css；
+
+分清<ul> <ol> <dl>的区别，不要一味的使用ul；
+
+
+2. 给页面添加必要的meta：
+
+例子：
+<meta name="author" content="John Doe">
+<meta name="copyright" content="&copy; 1997 Acme Corp.">
+<meta name="keywords" content="corporate,guidelines,cataloging">
+<meta name="date" content="1994-11-06T08:49:37+00:00">
+
+3. 加注释。
+
+例子：
+<div class=“content">
+     …..//很长很长的代码
+</div>
+<!— END div.content  -->
+加上这个注释可以便于知道div.content在哪结束
+
+高性能的HTML代码
+
+1. link标签放在前面，script标签放在后面。
+
+
+2. 删除多余的标签。
+
+例子：
+<div>
+    <ul>
+        <li>item1</li>
+        <li>item2</li>
+        <li>item3</li>
+    </ul>
+</div>
+
+
+1. 在头部通过注释写明文件信息。
+
+例子：
+/*  
+*@Description: public common css （可写中文）  
+*@Author:      sev7n  
+*@Update:      sev7n(2011-08-09 17:22)  
+*/  
+
+
+2. 严禁按内容、功能命名，如left、right等方向名词。
+
+
+3.  尽量提高代码模块的复用，例如用header、footer、page、btn等通用名统一样式，对于独立模块则可按xxx-header的方式命名。
+
+
+4. 严禁使用无意义的选择器。
+
+例子：
+x：.content #test {...}
+对： #test {...}
+
+
+5. 禁止滥用!important，使用前必须先和他人讨论确认不会对他人的代码造成影响。
+
+
+6. CSS书写建议按以下顺序，并在二者间换行，以增强可读性：
+6.1、显示属性
+display | position | float | clear | cursor …
+6.2、盒模型
+margin | padding | width | height
+6.3、文本属性
+vertical-align | white-space | text-decoration | text-align | color | font | content …
+6.4、边框背景
+border | background
+6.5、内容管理、层级
+overflow | z-index | zoom
+
+例子：
+.test {
+     position: absolute;
+     top: 0;
+
+     width: 100px;
+     height: 100px;
+
+     z-index: 1000;
+}
+
+
+7, 数为0时后面不用加单位。
+
+例子：
+.test {
+     width: 0;
+}
+
+
+8. 多选择器规则之间必须换行。
+
+例子：
+a.btn,
+input .btn,
+c.btn {
+     ….
+}
+
+
+9. 某些小图片必须用雪碧图合并。
+
+
+10. 使用hack需注释，说清楚用于什么浏览器和它的功能是什么。
+
+例子：
+selector {
+     width: 100px;
+     *width: 120px; /* IE6-7  对宽度进行调整 */
+}
+
+
+11. 链接的样式需按照下面这个顺序（页面执行的顺序）来写：
+a:link -> a:visited -> a:hover -> a:active
+
+
+12. 禁用内联。
+
+
+1. 命名方式：
+     构造函数使用驼峰式+首字母大写（eg：ModuleClass()）
+     共有方法使用驼峰式（eg：getPosition()）
+     变量使用驼峰式（eg：var myPositon = 1;）
+
+
+2. 所有名称必须使用意义明确的英文，严禁使用拼音。
+
+
+3. 慎用大量的if...else语句，可用switch等方法替换。
+
+
+4. 注释：
+
+例子：
+/* 单独占用一行 */
+function xxx() {…} // 就在需要注释的语句所在的那行
+
+
+5. 尽量避免使用缩写单词。
+
+
+6. 命名时注意考虑到与他人代码命名的冲突。
+
+
+7. 一行代码长度不超过120个字，如果用字符串表示HTML代码，需按HTML格式缩进，而不是写作一行。
+
+例子：
+var test = ‘<div>’ +
+                    ‘<p class=“test”>' +
+               ‘</div>’;
+x：var test = ‘<div><p class=“test”></div>’;
