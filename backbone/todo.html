@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link rel="stylesheet" type="text/css" href="todo.css">
+	</head>
+	<body>
+		<div id="todoApp">
+			<div class="title">
+				<h1>TODO</h1>
+			</div>
+			<div class="content">
+				<div id="createTodo">
+					<input id="newTodo" placeholder="what needs to be done" type="text"/>
+				</div>
+				<div id="todos">
+					<ul id="todoList"></ul>
+				</div>
+			</div>
+		</div>
+		<script type="text/template" id="item-template">
+			<div class="todo {{if done}}done{{/if}}">
+				<div class="display" title="Double click to edit...">
+					<input class="check" type="checkbox" {{if done}}checked="checked"{{/if}}/>
+					<div class="todo-content">${content}</div>
+					<span class="todo-destroy"></span>
+				</div>
+				<div class="edit">
+					<input class="todo-input" type="text" value="${content}"/>
+				</div>
+			</div>
+		</script>
+		<script type="text/javascript" src="jquery_1.11_min.js"></script>
+			<script type="text/javascript" src="jquery.tmpl.js"></script>
+		<script type="text/javascript" src="underscore.js"></script>
+		<script type="text/javascript" src="todo.js"></script>
+		<script type="text/javascript" src="backbone.js"></script>
+		<script type="text/javascript" src="backbone.localStorage.js"></script>
+	</body>
+</html>
