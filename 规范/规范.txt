@@ -186,3 +186,7 @@ var test = ‘<div>’ +
                     ‘<p class=“test”>' +
                ‘</div>’;
 x：var test = ‘<div><p class=“test”></div>’;
+
+8. 注意空格的使用,可以比较整洁的表示代码。
+
+9. 对于构造函数，首字母大写。
