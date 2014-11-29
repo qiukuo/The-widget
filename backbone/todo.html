@@ -1,39 +1,67 @@
-<!DOCTYPE html>
-<html>
-	<head>
-		<link rel="stylesheet" type="text/css" href="todo.css">
-	</head>
-	<body>
-		<div id="todoApp">
-			<div class="title">
-				<h1>TODO</h1>
-			</div>
-			<div class="content">
-				<div id="createTodo">
-					<input id="newTodo" placeholder="what needs to be done" type="text"/>
-				</div>
-				<div id="todos">
-					<ul id="todoList"></ul>
-				</div>
-			</div>
-		</div>
-		<script type="text/template" id="item-template">
-			<div class="todo {{if done}}done{{/if}}">
-				<div class="display" title="Double click to edit...">
-					<input class="check" type="checkbox" {{if done}}checked="checked"{{/if}}/>
-					<div class="todo-content">${content}</div>
-					<span class="todo-destroy"></span>
-				</div>
-				<div class="edit">
-					<input class="todo-input" type="text" value="${content}"/>
-				</div>
-			</div>
-		</script>
-		<script type="text/javascript" src="jquery_1.11_min.js"></script>
-			<script type="text/javascript" src="jquery.tmpl.js"></script>
-		<script type="text/javascript" src="underscore.js"></script>
-		<script type="text/javascript" src="todo.js"></script>
-		<script type="text/javascript" src="backbone.js"></script>
-		<script type="text/javascript" src="backbone.localStorage.js"></script>
-	</body>
-</html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <title>Backbone.js Todos</title>
+  <link rel="stylesheet" href="todos.css">
+<style type="text/css"></style></head>
+
+<body data-feedly-mini="yes">
+
+  <div id="todoapp">
+
+    <header>
+      <h1>Todos</h1>
+      <input id="new-todo" type="text" placeholder="What needs to be done?">
+    </header>
+
+    <section id="main" style="display: none;">
+      <input id="toggle-all" type="checkbox">
+      <label for="toggle-all">Mark all as complete</label>
+      <ul id="todo-list"></ul>
+    </section>
+
+    <footer style="display: none;">
+    
+    <div class="todo-count"><b>1</b> item left</div>
+  </footer>
+
+  </div>
+
+  <div id="instructions">
+    Double-click to edit a todo.
+  </div>
+
+  <div id="credits">
+    Created by
+    <br>
+    <a href="http://jgn.me/">Jérôme Gravel-Niquet</a>.
+    <br>Rewritten by: <a href="http://addyosmani.github.com/todomvc">TodoMVC</a>.
+  </div>
+
+  <script src="json2.js"></script>
+  <script src="jquery_1.11_min.js"></script>
+  <script src="underscore.js"></script>
+  <script src="backbone.js"></script>
+  <script src="backbone.localStorage.js"></script>
+  <script src="todo.js"></script>
+
+  <!-- Templates -->
+
+  <script type="text/template" id="item-template">
+    <div class="view">
+      <input class="toggle" type="checkbox" <%= done ? 'checked="checked"' : '' %> />
+      <label><%- title %></label>
+      <a class="destroy"></a>
+    </div>
+    <input class="edit" type="text" value="<%- title %>" />
+  </script>
+
+  <script type="text/template" id="stats-template">
+    <% if (done) { %>
+      <a id="clear-completed">Clear <%= done %> completed <%= done == 1 ? 'item' : 'items' %></a>
+    <% } %>
+    <div class="todo-count"><b><%= remaining %></b> <%= remaining == 1 ? 'item' : 'items' %> left</div>
+  </script>
+
+  
+
+<div id="feedly-mini" title="feedly Mini tookit"></div></body></html>
