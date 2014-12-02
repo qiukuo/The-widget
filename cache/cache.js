@@ -1,3 +1,6 @@
+// time: 14/11/15;
+// by  : litkk;
+// for : huang
 $(document).ready(function () {
 	var type=0;
 	$(".bu1").click(function(){
