@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>头像上传</title>
+</head>
+<body>
+	
+		<div class="main_con_old">
+			<img src="user.jpg"></img>
+			<p>当前头像</p>
+		</div>
+		<div class="main_con_new" id="result">
+                <img id="max_img" src="user.jpg">
+		</div>
+		<div id="new_box" >
+			<img id="min_img" src="user.jpg">
+		</div>
+		<input class="take_img" type="file" id="file" ></input>
+		<input type="button" class="read_url" value="预览" onclick="readAsDataURL()"/>  
+	</div>
+	<script type="text/javascript" src="jquery_11_min.js">
+    </script>
+    <script type="text/javascript" src="jquery.Jcrop.min.js">
+    </script>
+    <script type="text/javascript" >
+
+var result=document.getElementById("result");  
+var file=document.getElementById("file");  
+  
+//判断浏览器是否支持FileReader接口  
+if(typeof FileReader == 'undefined'){  
+    result.InnerHTML="<p>你的浏览器不支持FileReader接口！</p>";  
+    //使选择控件不可操作  
+    file.setAttribute("disabled","disabled");  
+}  
+var api = $.Jcrop('#max_img',{
+                  onChange: showPreview,
+                  onSelect: showPreview,
+                  aspectRatio: 1
+           });
+
+$(document).ready(function(){
+  $("#file").bind("change",function(){
+    readAsDataURL();
+  })
+})
+function readAsDataURL(){  
+    //检验是否为图像文件  
+    var file = document.getElementById("file").files[0];  
+    if(!/image\/\w+/.test(file.type)){  
+        alert("这个需要图片！");  
+        return false;  
+    }  
+    var reader = new FileReader();  
+    //将文件以Data URL形式读入页面  
+    reader.readAsDataURL(file);  
+    reader.onload=function(e){  
+        //显示文件  
+      $("#max_img").attr("src",this.result);
+      $("#min_img").attr("src",this.result);
+      api.destroy();
+      api = $.Jcrop('#max_img',{
+                  onChange: showPreview,
+                  onSelect: showPreview,
+                  aspectRatio: 1
+           }); 
+           api.animateTo([100,100,300,300])
+    } 
+};
+function showPreview(coords){
+        if(parseInt(coords.w) > 0){
+            //计算预览区域图片缩放的比例，通过计算显示区域的宽度(与高度)与剪裁的宽度(与高度)之比得到
+            var rx = $("#new_box").width() / coords.w; 
+            var ry = $("#new_box").height() / coords.h;
+            //通过比例值控制图片的样式与显示
+            $("#min_img").css({
+                width:Math.round(rx * $("#max_img").width()) + "px",  //预览图片宽度为计算比例值与原图片宽度的乘积
+                height:Math.round(rx * $("#max_img").height()) + "px",  //预览图片高度为计算比例值与原图片高度的乘积
+                marginLeft:"-" + Math.round(rx * coords.x) + "px",
+                marginTop:"-" + Math.round(ry * coords.y) + "px"
+            });
+        }
+        $(".x").val(api.tellScaled().x);
+        $(".y").val(api.tellScaled().x)
+        $(".x1").val(api.tellScaled().x2);
+        $(".y1").val(api.tellScaled().y2);
+        $(".w").val(api.tellScaled().w);
+        $(".h").val(api.tellScaled().h);
+    }
+
+
+  
+
+
+    </script>
+</body>
+</html>
