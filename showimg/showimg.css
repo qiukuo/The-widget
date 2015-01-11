@@ -1,0 +1,19 @@
+#f_showimg{
+	background-color: rgba(68, 68, 68, 0.6);
+	position: fixed;
+	left: 0px;
+	top:0px;
+}
+.showimg_close{
+	margin: 10px;
+	width: 50px;
+	position: relative;
+	cursor: pointer;
+}
+.showimg_con{
+	position: fixed;
+	z-index: 5;
+	left: 10%;
+	bottom: 5%;
+	cursor: pointer;
+}
